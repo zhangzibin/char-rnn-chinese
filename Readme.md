@@ -9,7 +9,8 @@ I also add an option called 'min_freq' because the vocab size in Chinese is very
 So delete some rare character may help.
 
 -----------------------------------------------
-Karpathy's Readme
+Karpathy's raw Readme, please follow this to setup your experiment.
+
 This code implements **multi-layer Recurrent Neural Network** (RNN, LSTM, and GRU) for training/sampling from character-level language models. The model learns to predict the probability of the next character in a sequence. In other words, the input is a single text file and the model learns to generate text like it.
 
 The context of this code base is described in detail in my [blog post](http://karpathy.github.io/2015/05/21/rnn-effectiveness/). The [project page](http://cs.stanford.edu/people/karpathy/char-rnn/) that has a few pointers to some datasets.
