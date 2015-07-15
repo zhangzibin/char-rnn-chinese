@@ -29,10 +29,10 @@ cmd:option('-seed',123,'random number generator\'s seed')
 cmd:option('-sample',1,' 0 to use max at each timestep, 1 to sample at each timestep')
 cmd:option('-primetext',"",'used as a prompt to "seed" the state of the LSTM using a given sequence, before we sample.')
 cmd:option('-length',2000,'max number of characters to sample')
-cmd:option('-stop','\\n\\n\\n\\n\\n','stop sampling when detected')
 cmd:option('-temperature',1,'temperature of sampling')
 cmd:option('-gpuid',0,'which gpu to use. -1 = use CPU')
 cmd:option('-verbose',1,'set to 0 to ONLY print the sampled text, no diagnostics')
+cmd:option('-stop','\n\n\n\n\n','stop sampling when detected')
 cmd:text()
 
 -- parse input params
