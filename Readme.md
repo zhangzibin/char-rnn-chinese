@@ -35,6 +35,13 @@ $ nohup th web_backend.lua &
 $ nohup python web_server.py & 
 ```
 
+## Model conversion between cpu and gpu
+I add a script to convert a model file trained by gpu to cpu model.
+You can try it as follow:
+```bash
+$ th convert.lua gpu_model cpu_model
+```
+
 -----------------------------------------------
 ## Karpathy's raw Readme
 please follow this to setup your experiment.
