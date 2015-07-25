@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>char-rnn API</title>
+    <meta charset="utf-8">
+    <meta content="initial-scale=1, minimum-scale=1, width=device-width" name="viewport">
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    
+    <style>
+      body{ padding:20px; padding-top:0px;}
+      #form_net_sample{max-width:650px;margin-right:auto;margin-left:auto;}
+      .description{font-weight:200;font-size:13px;}
+      label{margin-top:5px;}
+    </style>
+    
+    <script>
+      function getChar(inputdata,callback) {        
+        $.ajax({
+          type: "POST",
+          contentType: "application/json; charset=utf-8",
+          url: "/api",
+          data: JSON.stringify(inputdata),
+          success: function (data) {
+            callback(data);
+          },
+          dataType: "json"
+        });
+      }
+      function getRes(sid,callback2) {        
+        $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "/res",
+        data: JSON.stringify({"sid":sid}),
+        success: function (res) {
+            callback2(res);
+        },
+        dataType: "json"
+        });
+      }
+      $(function() { 
+        var interval;
+        function callback(data){
+            interval = setInterval(function(){
+                if(data.sid == 0)
+                    $('#form_output').val('backend service not found.');
+                else
+                    getRes(data.sid, callback2);
+            }, 1000);
+        }
+        function callback2(res){
+            if(res.responds != '0'){
+                clearInterval(interval);
+                $('#form_output').val(res.responds);
+            }
+        }
+        $( "#form_net_sample" ).submit(function( event ) {
+          event.preventDefault();
+          $('#form_output').val('load...');
+          var primetext = $('#form_input').val();
+          if(primetext.length <= 0){primetext = '';}
+          var temperature = $('#form_temperature').val();
+          if(temperature <= 0 || temperature > 10){temperature = '1';}
+          var seed = $('#form_seed').val();
+          if(seed.length <= 0){seed = '123';}
+          getChar({"primetext":primetext, "temperature":temperature, "seed":seed},callback);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    
+    <form method="post" id="form_net_sample" class="form-group">
+		<label for="form_input">primetext<span class="description"></span></label>
+      <input name="form_input" type="text" class="form-control" id="form_input" placeholder="your text" value="">
+      <label for="form_temperature">temperature<span class="description">(0-1)</span></label>
+      <input name="form_temperature" type="text" class="form-control" id="form_temperature" placeholder="0.7" value="0.7">
+      <label for="form_seed">seed<span class="description"> (any number)</span></label>
+      <input name="form_seed" type="text" class="form-control" id="form_seed" placeholder="1" value="1">
+
+      <br/>
+      <button type="submit" class="btn btn-default">submit</button>  
+      <br/><br/>
+      
+      <label for="form_output">result</label>
+      <textarea disabled name="form_output" id="form_output" class="form-control" rows="15"></textarea>
+    </form>
+  </body>
+</html>

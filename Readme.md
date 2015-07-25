@@ -2,14 +2,41 @@
 # char-rnn-chinese
 Based on https://github.com/karpathy/char-rnn. make the code work well with Chinese.
 
+## Chinese process
 Make the code can process both English and Chinese characters.
 This is my first touch of Lua, so the string process seems silly, but it works well.
 
+## opt.min_freq
 I also add an option called 'min_freq' because the vocab size in Chinese is very big, which makes the parameter num increase a lot.
 So delete some rare character may help.
 
+## web interface
+A web demo is added for others to test model easily, based on sub/pub of redis.
+I use redis because i can't found some good RPC or WebServer work well integrated with Torch.
+You should notice that the demo is async by ajax. To setup the demo on ubuntu:
+Install redis and start it
+```bash
+$ wget http://download.redis.io/releases/redis-3.0.3.tar.gz
+$ tar xzf redis-3.0.3.tar.gz
+$ cd redis-3.0.3
+$ make
+$ sudo make install
+$ redis-server &
+```
+Then install flask and the redis plugin for python:
+```bash
+$ sudo pip install flask
+$ sudo pip install redis
+```
+Put you model file in online_model, rename it as 'model.t7', the start the backend and fontend script:
+```bash
+$ nohup th web_backend.lua &
+$ nohup python web_server.py & 
+```
+
 -----------------------------------------------
-Karpathy's raw Readme, please follow this to setup your experiment.
+## Karpathy's raw Readme
+please follow this to setup your experiment.
 
 This code implements **multi-layer Recurrent Neural Network** (RNN, LSTM, and GRU) for training/sampling from character-level language models. The model learns to predict the probability of the next character in a sequence. In other words, the input is a single text file and the model learns to generate text like it.
 
