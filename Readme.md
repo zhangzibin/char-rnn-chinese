@@ -23,10 +23,11 @@ $ make
 $ sudo make install
 $ redis-server &
 ```
-Then install flask and the redis plugin for python:
+Then install flask and the redis plugin:
 ```bash
 $ sudo pip install flask
 $ sudo pip install redis
+$ luarocks install redis-lua
 ```
 Put you model file in online_model, rename it as 'model.t7', the start the backend and fontend script:
 ```bash
