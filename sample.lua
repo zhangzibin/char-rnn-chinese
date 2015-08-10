@@ -80,7 +80,7 @@ local num_layers = checkpoint.opt.num_layers
 current_state = {}
 for L = 1,checkpoint.opt.num_layers do
     -- c and h for all layers
-    local h_init = torch.zeros(1, checkpoint.opt.rnn_size):float()
+    local h_init = torch.zeros(1, checkpoint.opt.rnn_size):double()
     if opt.gpuid >= 0 then h_init = h_init:cuda() end
     table.insert(current_state, h_init:clone())
     table.insert(current_state, h_init:clone())

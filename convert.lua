@@ -33,6 +33,6 @@ else
 end
 
 checkpoint = torch.load(opt.load_model)
-checkpoint.protos.rnn:float()
-checkpoint.protos.criterion:float()
+checkpoint.protos.rnn:double()
+checkpoint.protos.criterion:double()
 torch.save(opt.save_file, checkpoint)
