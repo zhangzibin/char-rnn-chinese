@@ -11,10 +11,11 @@ I also add an option called 'min_freq' because the vocab size in Chinese is very
 So delete some rare character may help.
 
 ## Scheduled Sampling
-Samy Bengio's paper [Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks](http://arxiv.org/abs/1506.03099) in NIPS15
-propose a simple but power method to implove RNN.
+Samy Bengio's paper [Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks](http://arxiv.org/abs/1506.03099) in NIPS15 propose a simple but power method to implove RNN.
+
 In my experiment, I find it helps a lot to avoid overfitting and make the test loss go deeper. I only use linear decay.
-Use `-use_ss` to turn on or turn off scheduled sampling, default is on. `-start_ss` is the start aomunt of real data, I suggest to use 1 because our model should learn data without noise at the very begining. `-min_ss` is also very important as too much noise will hurt performance. Finally, `-decay_ss` is the linear decay rate.
+
+Use `-use_ss` to turn on or turn off scheduled sampling, default is on. `-start_ss` is the start aomunt of real data, I suggest to use 1 because our model should learn data without noise at the very beginning. `-min_ss` is also very important as too much noise will hurt performance. Finally, `-decay_ss` is the linear decay rate.
 
 
 ## Model conversion between cpu and gpu
